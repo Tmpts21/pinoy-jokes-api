@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Pinoy Jokes Api </title>  
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">  
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">  
+
+
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+
+
+</head>
+ <style>  
+
+ body{  
+    font-family: 'Courier Prime', monospace;
+    font-family: 'Roboto Mono', monospace; 
+    background-color: #141d26;
+ }   
+ a {  
+     text-decoration: none; 
+     
+  
+ }
+
+
+ </style>
+<body>  
+    <div class="container" style="width: 100%;">     
+        <br> 
+        <div class="row text-white ">  
+            <div class="col-lg border-right " style="height: 95vh; background-color: #243447;">        
+                <br> 
+                <div class = 'text-center ' style="font-size: 20px;">
+                    Pinoy Jokes Api 🤣                   
+                </div>
+
+
+                <br> 
+                <p style="font-size : 13px;">This joke api is made to brighten up your day. Get jokes randomly or based on your preferred Filipino dialect. </p>      
+
+                <br>   
+                <small><font class='text-danger'>📝 Note: </font> As of now the api only supports 2 Filipino dialects (tagalog , bisaya). Help me add more jokes by contributing to this a project</small>   
+                <br> 
+                <br> 
+                <hr style="background-color: white;">
+                <div class='ml-2'>
+                    <h5>Endpoints
+                        <a href="https://github.com" class="float-right mb-3 " style="font-size: 35px; text-decoration: none; color: white;">  <i class="fab fa-github"></i> </a>       
+                    </h5>   
+                </div> 
+                <div class="p-2">  
+                    <span style="font-size: 14px;">Grab a random joke</span>     
+                    <div class="card" style="background-color: #141d26;">   
+                        <div class="card-text text-white p-3 ">       
+                                GET /random  
+                                <a href="#" class='float-right' onclick="getRandomJoke()">Try it </a>  
+                        </div>     
+                    </div>
+                </div>  
+                 
+                       
+                <div class="p-2">
+                    <span style="font-size: 14px;">Grab a random joke based on count </span>      
+                    <div class="card" style="background-color: #141d26;">   
+                        <div class="card-text text-white p-3 ">       
+                                GET /random/<font class="text-success">:count</font> 
+                                <a href="#" class='float-right' onclick="getJokesbyCount(document.getElementById('countSelect').value)">Try it </a>  
+                        </div>     
+                    </div>
+                </div>   
+
+                <div class='p-2'>  
+                    <span style="font-size: 14px;">Grab a joke based on dialect </span>       
+                    <div class="card" style="background-color: #141d26;">   
+                        <div class="card-text text-white p-3 ">       
+                                GET /joke/<font class="text-success">:dialect</font>  
+                                <a href="#" class='float-right' onclick="getJokesbyDialect(document.getElementById('dialectSelect').value)">Try it </a>  
+                        </div>     
+                    </div>
+                </div>   
+
+                <div class="p-2">  
+                    <span style="font-size: 14px;">Grab a joke based on dialect and count </span>        
+                    <div class="card" style="background-color: #141d26;">   
+                        <div class="card-text text-white p-3 ">       
+                                GET /joke/<font class="text-success">:dialect</font>/<font class="text-success">:count</font>  
+                                <a href="#" class='float-right' onclick="getJokesbyDialectAndCount(document.getElementById('dialectSelect').value , document.getElementById('countSelect').value )">Try it </a>   
+                        </div>     
+                    </div>
+                </div>  
+
+            </div>  
+
+            <div class="col-lg" style="height: 95vh; background-color: #243447;">         
+                <br> 
+                <div class="input-group mb-2">  
+                    <input type="text" class="form-control" placeholder="{url}" aria-label="url" id="urlInput" readonly>  
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="button" id='sendRequestButton' onclick="sendRequest() ">Send Request</button> 
+                    </div>  
+                </div>   
+
+                <div>
+                    <p class="ml-1 mt-1 ">params : </p>   
+                </div>
+                <div class='row'>           
+                    <div class = 'ml-3 mt-1 '> 
+                        <span id = 'countLabel' hidden> count : </span>   
+                    </div>       
+                    <div class="col-4"> 
+                            <div class="form-inline"> 
+                                <select class="custom-select custom-select-sm" id = 'countSelect' onchange="getJokesbyCount(document.getElementById('countSelect').value )" hidden>    
+                                    <option value="1" selected >1</option>   
+                                    <option value="2">2</option>  
+                                    <option value="3">3</option>  
+                                    <option value="4">4</option>  
+                                    <option value="5">5</option>  
+                                    <option value="6">6</option>  
+                                    <option value="7">7</option> 
+                                    <option value="8">8</option> 
+                                    <option value="9">9</option>  
+                                    <option value="10">10</option> 
+                                </select>
+                            </div>
+                    </div>     
+
+                </div>     
+
+                <div class="row">
+                     
+                        <div class = 'ml-3 mt-1 '> 
+                            <span id = 'dialectLabel' hidden> dialect : </span>    
+                        </div>     
+                     
+                    <div class="col-4"> 
+                            <div class="form-inline"> 
+                                <select class="custom-select custom-select-sm" id = 'dialectSelect' onchange="getJokesbyDialect(document.getElementById('dialectSelect').value )" hidden>     
+                                    <option value="tagalog" selected >Tagalog</option>  
+                                    <option value="bisaya">Bisaya</option>
+                                </select>
+                            </div>
+                    </div>      
+                </div> 
+
+                <div class="row">
+                        <div class = ' ml-3 mt-1'>   
+                            <span id = 'countLabel2' hidden> count : </span>      
+                        </div>     
+
+                    <div class="col-4"> 
+                            <div class="form-inline"> 
+                                <select class="custom-select custom-select-sm" id = 'countSelect2' onchange="getJokesbyDialectAndCount(document.getElementById('dialectSelect2').value , document.getElementById('countSelect2').value )" hidden >          
+                                    <option value="1" selected >1</option>   
+                                    <option value="2">2</option>  
+                                    <option value="3">3</option>  
+                                    <option value="4">4</option>  
+                                    <option value="5">5</option>  
+                                    <option value="6">6</option>  
+                                    <option value="7">7</option> 
+                                    <option value="8">8</option> 
+                                    <option value="9">9</option>  
+                                    <option value="10">10</option> 
+                                </select>
+                            </div>
+                    </div>  
+
+
+                        <div class = 'mt-1 '> 
+                            <span id = 'dialectLabel2' hidden> dialect : </span>     
+                        </div>     
+
+                    <div class="col-4"> 
+                            <div class="form-inline"> 
+                                <select class="custom-select custom-select-sm" id = 'dialectSelect2' onchange="getJokesbyDialectAndCount(document.getElementById('dialectSelect2').value , document.getElementById('countSelect2').value )" hidden >        
+                                    <option value="tagalog" selected >Tagalog</option>   
+                                    <option value="bisaya">Bisaya</option>
+                                </select>
+                            </div>
+                    </div>  
+
+                </div> 
+                <br> 
+
+                <textarea class="text-white p-2 " name="output" id="output" style="height: 75%; width: 100% ; background-color: #141d26; border-radius: 15px; font-size: 12px; white-space: pre;" readonly></textarea>     
+
+        </div>
+ 
+    </div>
+  
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script type="text/javascript">       
+
+        function getJokesbyCount (count) {     
+            document.getElementById('output').value = ""
+            var url = '/random/'  + count    
+            document.getElementById('urlInput').value = url ;     
+
+            // togle hidden atrribute  
+
+            document.getElementById('dialectSelect').setAttribute('hidden' , "");      
+            document.getElementById('dialectLabel').setAttribute('hidden' , "");       
+
+            document.getElementById('countSelect').removeAttribute('hidden');      
+            document.getElementById('countLabel').removeAttribute('hidden');      
+
+            document.getElementById('countSelect2').setAttribute('hidden' , "");       
+            document.getElementById('countLabel2').setAttribute('hidden' , "");          
+
+            document.getElementById('dialectSelect2').setAttribute('hidden' , "");       
+            document.getElementById('dialectLabel2').setAttribute('hidden' , "");         
+
+        } 
+
+        function getRandomJoke() {          
+
+            document.getElementById('output').value = "" 
+
+            //toggle hidden attribute   
+
+            document.getElementById('dialectSelect').setAttribute('hidden' , "");      
+            document.getElementById('dialectLabel').setAttribute('hidden' , "");       
+
+            document.getElementById('countSelect').setAttribute('hidden' , "");   
+            document.getElementById('countLabel').setAttribute('hidden' , "");    
+
+            document.getElementById('countSelect2').setAttribute('hidden' , "");       
+            document.getElementById('countLabel2').setAttribute('hidden' , "");          
+
+            document.getElementById('dialectSelect2').setAttribute('hidden' , "");       
+            document.getElementById('dialectLabel2').setAttribute('hidden' , "");         
+            
+            var url = '/random'
+            document.getElementById('urlInput').value = url ;    
+
+        }  
+
+        function getJokesbyDialect(dialect) {      
+
+            document.getElementById('output').value = "" 
+
+            //toggle hidden attribute 
+            document.getElementById('dialectSelect').removeAttribute('hidden');     
+            document.getElementById('dialectLabel').removeAttribute('hidden');      
+
+            document.getElementById('countSelect').setAttribute('hidden' , "");   
+            document.getElementById('countLabel').setAttribute('hidden' , "");      
+
+
+            document.getElementById('countSelect2').setAttribute('hidden' , "");       
+            document.getElementById('countLabel2').setAttribute('hidden' , "");          
+
+            document.getElementById('dialectSelect2').setAttribute('hidden' , "");       
+            document.getElementById('dialectLabel2').setAttribute('hidden' , "");         
+            
+            document.getElementById('urlInput').value = '/joke/' + dialect 
+
+
+        } 
+
+        function getJokesbyDialectAndCount(dialect , count ) {     
+
+
+            document.getElementById('output').value = "" 
+
+            // toggle hidden atrribute 
+
+            document.getElementById('dialectSelect2').removeAttribute('hidden');     
+            document.getElementById('dialectLabel2').removeAttribute('hidden');        
+
+            document.getElementById('countSelect2').removeAttribute('hidden');     
+            document.getElementById('countLabel2').removeAttribute('hidden');        
+             
+            document.getElementById('countSelect').setAttribute('hidden' , "");      
+            document.getElementById('countLabel').setAttribute('hidden' , "");          
+
+            document.getElementById('dialectSelect').setAttribute('hidden' , "");       
+            document.getElementById('dialectLabel').setAttribute('hidden' , "");          
+
+
+            document.getElementById('urlInput').value = '/joke/' + dialect + '/' + count
+
+        }
+
+        function sendRequest() {   
+            var url = document.getElementById('urlInput').value  
+
+            if (url != "") {      
+
+                axios.get(url)   
+                    .then(res => {  
+                        var data = JSON.stringify(res.data, undefined, 4);       
+                        document.getElementById('output').value = data   
+                        console.log(res)
+                    })
+                    .catch(err => console.error(error));
+                }
+        } 
+
+
+    
+        
+    </script> 
+</body>
+</html>
