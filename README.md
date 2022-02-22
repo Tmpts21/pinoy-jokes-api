@@ -24,7 +24,7 @@ $ curl https://pinoy-jokes-api.de.r.appspot.com/random
 
 ```python
 import requests 
-req = requests.get('https://filipino-jokes-api.herokuapp.com/random').json()
+req = requests.get('https://pinoy-jokes-api.de.r.appspot.com/random').json()
 print(req) 
 
 '''
